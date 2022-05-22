@@ -13,6 +13,7 @@ export class CommandManager {
       for (const msg of this.actionsQueue) {
 
         this.doAction({ action, data })
+      
       }
 
       await this.__sleep()
@@ -24,13 +25,13 @@ export class CommandManager {
 
     this.__log(`Saving command: ${command} with answer: ${answer}`)
 
-    fileManager.__addLineToFile({key: command, text: answer })
+    fileManager.__addLineToFile({ key: command, text: answer })
 
   }
 
   __deleteCommand({ command }) {
 
-    fileManager.__deleteLineFromFile({key: command})
+    fileManager.__deleteLineFromFile({ key: command })
 
   }
 
@@ -56,16 +57,15 @@ export class CommandManager {
 
   }
 
-  __sleep() {
-
-    return new Promise((ok) => setTimeout(ok, 1000))
-  }
-
   __addActionToQueue({ action, data }) {
 
     this.actionsQueue.push({ action, data })
 
   }
 
+  __sleep() {
+
+    return new Promise((ok) => setTimeout(ok, 1000))
+  }
 
 }

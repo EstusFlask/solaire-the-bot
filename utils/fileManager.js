@@ -1,6 +1,6 @@
 import { BaseManager } from "./baseManager"
 import { TextSanitizer } from "./textSanitizer"
-
+const fs = require('fs');
 const textSanitizer = new TextSanitizer()
 
 export class FileManager extends BaseManager {
@@ -13,8 +13,20 @@ export class FileManager extends BaseManager {
         
         const line = this.__buildLine({key, text})
 
-        this.__log(`Line added: ${line}`)
-    
+        fs.appendFile(this.file, line, err => {
+
+            if (err) {
+            
+                this.__log(err)
+            
+            } else {
+
+                this.__log(`Line added: ${line}`)
+
+            }
+
+        })
+
     }
 
     __deleteLineFromFile({key, text}){
