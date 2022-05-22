@@ -1,7 +1,8 @@
 const {processMessage} = require('./utils/messageProcessor.js')
 
 const TeleBot = require('telebot');
-const {  Learning } = require('./utils/learning.js');
+
+const {  Learning } = require('./utils/commandManager.js');
 
 const learning = new Learning()
 

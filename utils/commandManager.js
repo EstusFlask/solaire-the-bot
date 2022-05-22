@@ -1,16 +1,16 @@
 import { BaseManager } from "./baseManager"
 import { FileManager } from "./fileManager"
 
-const fileManager = new FileManager()
+const fileManager = new FileManager(file: "commands.file")
 
 export class CommandManager {
-  queue = []
+  actionsQueue = []
 
   async init() {
 
     while (1) {
 
-      for (const msg of this.queue) {
+      for (const msg of this.actionsQueue) {
 
         this.doAction({ action, data })
       }
@@ -24,13 +24,13 @@ export class CommandManager {
 
     this.__log(`Saving command: ${command} with answer: ${answer}`)
 
-    fileManager.__addLineToFile({ file: "commands.file", command: command, answer: answer })
+    fileManager.__addLineToFile({key: command, text: answer })
 
   }
 
   __deleteCommand({ command }) {
 
-
+    fileManager.__deleteLineFromFile({key: command})
 
   }
 
@@ -61,9 +61,9 @@ export class CommandManager {
     return new Promise((ok) => setTimeout(ok, 1000))
   }
 
-  __addToQueue({ command, answer }) {
+  __addActionToQueue({ action, data }) {
 
-    this.queue.push({ command, answer })
+    this.actionsQueue.push({ action, data })
 
   }
 
