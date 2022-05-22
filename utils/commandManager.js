@@ -12,9 +12,11 @@ export class CommandManager {
 
     while (1) {
 
-      for (const msg of this.actionsQueue) {
+      for (const queueElement of this.actionsQueue) {
 
-        this.__doAction({ action, data })
+        let { action, data } = queueElement
+
+        this.__doAction({ action: action, data: data })
       
       }
 
