@@ -4,7 +4,7 @@ import { TextSanitizer } from './classes/TextSanitizer.js'
 import { createRequire } from "module"
 const require = createRequire(import.meta.url)
 const TeleBot = require('telebot');
-const bot = new TeleBot("TOKEN")
+const bot = new TeleBot("5281229315:AAHFGYpxymJ8zFF2eulr9I8S-QlywVX-tfo")
 
 const textSanitizer = new TextSanitizer()
 const actionsManager = new ActionsManager()

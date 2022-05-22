@@ -34,31 +34,5 @@ export class FileManager extends BaseManager {
         })
 
     }
-
-    __loadFile({path}){
-
-        fs.readFile(path, {encoding:"utf-8"} ,(err,data) =>{
-            
-            if (err) throw err
-
-            return data
-
-        })
-
-    }
-
-    __deleteLineFromFile({key, text}){
-        
-        fs.readFile(this.file, {encoding:"utf-8"} ,(err,data) =>{
-            
-            if (err) throw err
-
-            this.__log(data)
-
-        })
-
-        this.__log(`Line deleted: ${line}`)
-    
-    }
   
 }

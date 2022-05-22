@@ -73,17 +73,6 @@ export class ActionsManager extends BaseManager {
 
   }
 
-
-  //ACTIONS - Should be in a separated module?
-
-  __saveCommand({ command, answer }) {
-
-    this.__log(`Saving command: ${command} with answer: ${answer}`)
-
-    fileManager.__addLineToFile({ key: command, text: answer })
-
-  }
-
   async __loadCommandsFromFileAsync({path}) {
 
     const fileStream = fs.createReadStream(path)
@@ -102,9 +91,20 @@ export class ActionsManager extends BaseManager {
 
   }
 
+  // ACTIONS - Should be in a separated modules. With validations.
+
+  __saveCommand({ command, answer }) {
+
+    this.__log(`Saving command: ${command} with answer: ${answer}`)
+
+    fileManager.__addLineToFile({ key: command, text: answer })
+
+  }
+
+
   __deleteCommand({ command }) {
 
-    fileManager.__deleteLineFromFile({ key: command })
+    throw Error("Not implemented")
 
   }
 

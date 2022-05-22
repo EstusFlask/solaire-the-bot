@@ -1,5 +1,5 @@
-FROM python:3.11.0b1-slim-bullseye
+FROM node:16
 
 COPY . .
 
-CMD ["pypytho"]
+CMD ["node", "index.js"]
