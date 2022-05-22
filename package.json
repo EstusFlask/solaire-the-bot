@@ -1,0 +1,26 @@
+{
+  "name": "solaire-the-bot",
+  "version": "1.0.0",
+  "description": "A funny telegram bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EstusFlask/solaire-the-bot.git"
+  },
+  "keywords": [
+    "telegram",
+    "bot"
+  ],
+  "author": "arvegadev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EstusFlask/solaire-the-bot/issues"
+  },
+  "homepage": "https://github.com/EstusFlask/solaire-the-bot#readme",
+  "dependencies": {
+    "telebot": "^1.4.1"
+  }
+}
