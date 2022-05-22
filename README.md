@@ -1,2 +1,2 @@
 # solaire-the-bot
-A funny Telegram bot
+A telegram bot
