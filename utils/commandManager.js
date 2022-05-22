@@ -10,8 +10,6 @@ export class CommandManager {
 
     this.__log("Init command manager")
 
-    return false
-
     while (1) {
 
       for (const msg of this.actionsQueue) {
