@@ -1,12 +1,16 @@
 import { BaseManager } from "./baseManager"
 import { TextSanitizer } from "./textSanitizer"
+
 const fs = require('fs');
+
 const textSanitizer = new TextSanitizer()
 
 export class FileManager extends BaseManager {
     
     constructor(file){
+
         this.file = file
+   
     }
 
     __addLineToFile({key, text}){
@@ -31,7 +35,13 @@ export class FileManager extends BaseManager {
 
     __deleteLineFromFile({key, text}){
         
-        
+        fs.readFile(this.file, {enoding:"utf-8"} ,(err,data) =>{
+            
+            if (err) throw err;
+
+            this.__log(data)
+
+        })
 
         this.__log(`Line deleted: ${line}`)
     

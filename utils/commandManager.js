@@ -1,18 +1,22 @@
 import { BaseManager } from "./baseManager"
 import { FileManager } from "./fileManager"
 
-const fileManager = new FileManager(file: "commands.file")
+const fileManager = new FileManager("commands.file")
 
 export class CommandManager {
   actionsQueue = []
 
   async init() {
 
+    this.__log("Init command manager")
+
+    return false
+
     while (1) {
 
       for (const msg of this.actionsQueue) {
 
-        this.doAction({ action, data })
+        this.__doAction({ action, data })
       
       }
 
@@ -39,7 +43,7 @@ export class CommandManager {
 
     switch (action) {
 
-      case "ADD_COMMAND":
+      case "ADD_OR_UPDATE_COMMAND":
 
         this.__saveCommand(data.command, data.answer)
 
@@ -52,6 +56,9 @@ export class CommandManager {
         break;
 
       default:
+
+        this.__log(`Unknown action: ${action}`)
+        
         break;
     }
 
