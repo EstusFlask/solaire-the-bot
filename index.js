@@ -1,37 +1,43 @@
+import { ActionsManager } from './classes/ActionsManager.js'
+import { MessageManager } from './classes/MessageManager.js'
+import { TextSanitizer } from './classes/TextSanitizer.js'
+import { createRequire } from "module"
+const require = createRequire(import.meta.url)
+const TeleBot = require('telebot');
+const bot = new TeleBot("TOKEN")
+
+const textSanitizer = new TextSanitizer()
+const actionsManager = new ActionsManager()
+const messageManager = new MessageManager()
 
 
-import { ActionsManager } from './utils/CommandManager.js';
-import { processMessage } from './utils/MessageProcessor.js';
-
-const commandManager = new ActionsManager()
-
-//INIT BOT
 var enabled = true;
 
-if (process.env.BOT_ENABLED || false) {
+bot.on('*', (event) => {
 
-    bot.on('*', (event) => {
+    event.text = event.text.toLowerCase()
 
-        if (event.text == "duerme solaire")
-            enabled = false
+    if (event.text == "sleep solaire")
+        enabled = false
 
-        if (event.text == "despierta solaire")
-            enabled = true
+    if (event.text == "wake up solaire")
+        enabled = true
 
-        if (enabled) {
-            console.log(`Received event: ${JSON.stringify(event)}`)
+    if (enabled) {
 
-            const message = processMessage(event.text)
+        console.log(`Received event: ${JSON.stringify(event)}`)
 
+        const message = messageManager.__processMessage(event.text)
+
+        if (message)
             return bot.sendMessage(event.chat.id, message);
-        }
-    });
 
-    bot.start();
+    }
+})
 
-}
+bot.start();
 
-await commandManager.init()
+await actionsManager.init()
 
 
 

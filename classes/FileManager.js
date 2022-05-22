@@ -2,7 +2,6 @@ import { BaseManager } from "./BaseManager.js"
 import { TextSanitizer } from "./TextSanitizer.js"
 import { createRequire } from "module"
 import { TextManager } from "./TextManager.js"
-
 const require = createRequire(import.meta.url)
 const fs = require('fs');
 const textManager = new TextManager()
@@ -36,9 +35,21 @@ export class FileManager extends BaseManager {
 
     }
 
+    __loadFile({path}){
+
+        fs.readFile(path, {encoding:"utf-8"} ,(err,data) =>{
+            
+            if (err) throw err
+
+            return data
+
+        })
+
+    }
+
     __deleteLineFromFile({key, text}){
         
-        fs.readFile(this.file, {enoding:"utf-8"} ,(err,data) =>{
+        fs.readFile(this.file, {encoding:"utf-8"} ,(err,data) =>{
             
             if (err) throw err
 

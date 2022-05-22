@@ -6,11 +6,11 @@ export class TextManager extends BaseManager {
 
     __buildTextLine({key, text}){
 
-        key = textSanitizer.__sanitize(key)
+        key = textSanitizer.__sanitize({text: key})
 
-        text = textSanitizer.__sanitize(text)
+        text = textSanitizer.__sanitize({text: text})
 
-        return  `${key}|${text}`
+        return  `${key}|${text}\n`
 
     }
 
