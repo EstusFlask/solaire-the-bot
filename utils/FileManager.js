@@ -1,13 +1,16 @@
-import { BaseManager } from "./baseManager"
-import { TextSanitizer } from "./textSanitizer"
+import { BaseManager } from "./BaseManager.js"
+import { TextSanitizer } from "./TextSanitizer.js"
+import { createRequire } from "module"
+import { TextManager } from "./TextManager.js"
 
+const require = createRequire(import.meta.url)
 const fs = require('fs');
-
-const textSanitizer = new TextSanitizer()
+const textManager = new TextManager()
 
 export class FileManager extends BaseManager {
     
     constructor(file){
+        super()
 
         this.file = file
    
@@ -15,7 +18,7 @@ export class FileManager extends BaseManager {
 
     __addLineToFile({key, text}){
         
-        const line = this.__buildLine({key, text})
+        const line = textManager.__buildTextLine({key, text})
 
         fs.appendFile(this.file, line, err => {
 
@@ -37,7 +40,7 @@ export class FileManager extends BaseManager {
         
         fs.readFile(this.file, {enoding:"utf-8"} ,(err,data) =>{
             
-            if (err) throw err;
+            if (err) throw err
 
             this.__log(data)
 
@@ -46,16 +49,5 @@ export class FileManager extends BaseManager {
         this.__log(`Line deleted: ${line}`)
     
     }
-
-    __buildLine({key, text}){
-
-        key = textSanitizer.__sanitize(key)
-
-        text = textSanitizer.__sanitize(text)
-
-        return  `${key}|${text}`
-
-    }
-
   
 }

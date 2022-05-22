@@ -1,42 +1,28 @@
-import { BaseManager } from "./baseManager"
-import { FileManager } from "./fileManager"
+import { BaseManager } from "./BaseManager.js"
+import { FileManager } from "./FileManager.js"
 
 const fileManager = new FileManager("commands.file")
 
-export class CommandManager {
-  actionsQueue = []
+export class ActionsManager extends BaseManager {
+  __actionsQueue = []
 
   async init() {
 
     this.__log("Init command manager")
 
-    while (1) {
+    while (true) {
 
-      for (const queueElement of this.actionsQueue) {
+      for (const queueElement of this.__actionsQueue) {
 
         let { action, data } = queueElement
 
         this.__doAction({ action: action, data: data })
-      
+
       }
 
       await this.__sleep()
 
     }
-  }
-
-  __saveCommand({ command, answer }) {
-
-    this.__log(`Saving command: ${command} with answer: ${answer}`)
-
-    fileManager.__addLineToFile({ key: command, text: answer })
-
-  }
-
-  __deleteCommand({ command }) {
-
-    fileManager.__deleteLineFromFile({ key: command })
-
   }
 
   __doAction({ action, data }) {
@@ -58,7 +44,7 @@ export class CommandManager {
       default:
 
         this.__log(`Unknown action: ${action}`)
-        
+
         break;
     }
 
@@ -66,13 +52,25 @@ export class CommandManager {
 
   __addActionToQueue({ action, data }) {
 
-    this.actionsQueue.push({ action, data })
+    this.__actionsQueue.push({ action, data })
 
   }
 
-  __sleep() {
 
-    return new Promise((ok) => setTimeout(ok, 1000))
+  //ACTIONS - Should be in a separated module?
+
+  __saveCommand({ command, answer }) {
+
+    this.__log(`Saving command: ${command} with answer: ${answer}`)
+
+    fileManager.__addLineToFile({ key: command, text: answer })
+
+  }
+
+  __deleteCommand({ command }) {
+
+    fileManager.__deleteLineFromFile({ key: command })
+
   }
 
 }
